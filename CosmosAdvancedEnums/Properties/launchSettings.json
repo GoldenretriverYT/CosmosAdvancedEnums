@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CosmosAdvancedEnums": {
+      "commandName": "Project",
+      "commandLineArgs": "../../../../AmazingTest/bin/Debug/net6.0/AmazingTest.dll"
+    }
+  }
+}
