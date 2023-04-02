@@ -24,3 +24,6 @@ If you are using an imported project and therefore rebuild the DLL when required
 
 ### From imported DLL
 You are gonna have to manually run the post-processor everytime you change that DLL. To do so, just open the cmd or shell in the folder of the DLL, then enter "CosmosAdvancedEnums <dll file>".
+
+## Credits
+CosmosAdvancedEnums uses Mono.Cecil (licensed under MIT) to modify and analyze the IL of the dlls
