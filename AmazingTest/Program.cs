@@ -6,7 +6,7 @@
 
             var str = Console.ReadLine() ?? throw new Exception("oof!");
 
-            if(!Enum.TryParse<TokenType>(str, out var res)) {
+            if(!Enum.TryParse<TokenType>(str, true, out var res)) {
                 Console.WriteLine("nope, not correct.");
                 return;
             }
