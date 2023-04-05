@@ -28,7 +28,7 @@ namespace CosmosAdvancedEnums {
         }
 
         static void RunReplaceCorlibPostprocessingOnType(TypeDefinition tdef, ModuleDefinition mod) {
-            Console.Write("Running replacecorlib-postprocessor on " + tdef.FullName);
+            Console.WriteLine("Running replacecorlib-postprocessor on " + tdef.FullName);
 
             foreach(var meth in tdef.Methods) {
                 if (!meth.HasBody) continue;
@@ -52,7 +52,7 @@ namespace CosmosAdvancedEnums {
                         continue;
                     }
 
-                    if(inst.OpCode == OpCodes.Call && (inst.Operand as MethodReference).Name == "TryParse") {
+                    if(inst.OpCode == OpCodes.Call && (inst.Operand as MethodReference).Name == "TryParse" && (inst.Operand as MethodReference).DeclaringType.Name == "Enum") {
                         if ((inst.Operand as MethodReference).Parameters.Count == 3) {
                             if(inst.Previous.Previous.OpCode == OpCodes.Ldc_I4_1) {
                                 // ignore case = true
@@ -65,6 +65,7 @@ namespace CosmosAdvancedEnums {
                                     generated[(inst.Operand as GenericInstanceMethod).GenericArguments[0].FullName].fromstr));
                             }
                         } else {
+                            Console.WriteLine($"replacing at offset {inst.Offset:x2}");
                             ilProc.Replace(inst, ilProc.Create(OpCodes.Call,
                                 generated[(inst.Operand as GenericInstanceMethod).GenericArguments[0].FullName].fromstr));
                         }
